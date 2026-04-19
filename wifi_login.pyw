@@ -1,4 +1,4 @@
-# Copyright (c) 2025 Trinayan Chaduvula.
+# Copyright (c) 2025 Trinayan Chaduvula(github.com/trinayan-zenez).
 # This file is part of hostel-wifi-login.
 # Licensed under the GNU General Public License v3.0
 # See LICENSE file or https://www.gnu.org/licenses/gpl-3.0.html
