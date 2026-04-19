@@ -19,6 +19,6 @@ pythonw wifi_login.pyw
 ## Auto-start with Windows
 Press Win+R → type shell:startup → drop a shortcut to wifi_login.pyw there
 ## License
-Copyright (c) 2025 YOUR_NAME. All rights reserved.  
+Copyright (c) 2025 Trinayan Chaduvula(github.com/trinayan-zenez). All rights reserved.  
 Licensed under [GNU GPLv3](LICENSE). You may not copy, distribute, or modify 
 this project without attribution and keeping it open source.
