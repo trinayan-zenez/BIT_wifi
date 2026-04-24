@@ -1,8 +1,7 @@
-# Copyright (c) 2025 Trinayan Chaduvula(github.com/trinayan-zenez).
-# This file is part of hostel-wifi-login.
-# Licensed under the GNU General Public License v3.0
-# See LICENSE file or https://www.gnu.org/licenses/gpl-3.0.html
-# Unauthorized copying, distribution, or modification is prohibited.
+import sys
+if sys.stdout is not None:
+    sys.stdout = open("nul", "w")
+    sys.stderr = open("nul", "w")
 import subprocess
 import requests
 import time
@@ -19,9 +18,7 @@ SSID_LIST = [
     "Hostel-1",
     "Hostel-2",
     "Hostel-3",
-    "Hostel-4"
     "College-WiFi",
-  # Add more if needed
 ]
 # ----DO NOT CHANGE BELOW UNLESS YOU KNOW WHAT YOU ARE DOING----#
 
@@ -201,9 +198,19 @@ def do_disconnect(icon, _):
 
     threading.Thread(target=task, daemon=True).start()
 
-# ── Entry point ───────────────────────────────────────────────────────────────
+import traceback
+import logging
 
-if __name__ == "__main__":
+# ── Logging setup ─────────────────────────────────────────────────────────────
+logging.basicConfig(
+    filename="wifi_login.log",
+    level=logging.INFO,
+    format="%(asctime)s — %(levelname)s — %(message)s"
+)
+
+# ── Crash-proof entry point ───────────────────────────────────────────────────
+
+def run_tray():
     icon = pystray.Icon(
         name  = "wifi_login",
         icon  = create_icon_image("blue"),
@@ -214,3 +221,15 @@ if __name__ == "__main__":
         )
     )
     icon.run()
+
+if __name__ == "__main__":
+    logging.info("App started.")
+    while True:
+        try:
+            run_tray()
+            logging.info("Tray exited normally.")
+            break                          # user clicked Quit — stop the loop
+        except Exception as e:
+            logging.error(f"Crash: {traceback.format_exc()}")
+            time.sleep(5)                  # wait 5s then restart the tray
+            logging.info("Restarting tray after crash...")
